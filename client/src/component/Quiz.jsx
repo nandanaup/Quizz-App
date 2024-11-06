@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { decode } from "html-entities";
+
+// static asset imports
 import backgroundImage from "../assets/Group.png";
 import loadingBackground from "../assets/bback.jpg";
 import finalBackground from "../assets/Frame.png"; // New background for Play Again
