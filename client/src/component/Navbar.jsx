@@ -1,72 +1,63 @@
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Navbar({ menuOpen, toggleMenu }) {
   return (
     <nav className="bg-lightblue-400 shadow-lg p-4 text-black fixed top-0 left-0 right-0 z-10">
-      {" "}
-      {/* Set navbar background to light blue and add shadow */}
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">Quiz Game</h1>{" "}
-        {/* Text color defaults to black */}
-        {/* Toggle button for mobile menu */}
+        <h1 className="text-xl font-bold ml-10">QuizSphere</h1>
+
+        <div className="hidden md:flex space-x-6 mr-20">
+          <Link to="/quiz" className="text-sm text-blue-950">
+            Home
+          </Link>
+          <Link to="/about" className="text-sm text-blue-950">
+            About
+          </Link>
+          <Link to="/settings" className="text-sm text-blue-950">
+            Settings
+          </Link>
+        </div>
+
         <button
           onClick={toggleMenu}
           className="block md:hidden text-2xl focus:outline-none"
         >
           <FontAwesomeIcon
             icon={menuOpen ? faTimes : faBars}
-            className="text-black" // Icon color set to black
+            className="text-black"
           />
         </button>
       </div>
+
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden mt-4 space-y-2 bg-lightblue-500 p-4 rounded">
-          {" "}
-          {/* Set mobile menu background to light blue */}
-          <a
-            href="#!"
-            className="block text-sm text-black" // Text color set to black
+          <Link
+            to="/quiz"
+            className="block text-sm text-black"
             onClick={toggleMenu}
           >
             Home
-          </a>
-          <a
-            href="#!"
-            className="block text-sm text-black" // Text color set to black
-            onClick={toggleMenu}
-          >
-            Settings
-          </a>
-          <a
-            href="#!"
-            className="block text-sm text-black" // Text color set to black
+          </Link>
+          <Link
+            to="/about"
+            className="block text-sm text-black"
             onClick={toggleMenu}
           >
             About
-          </a>
+          </Link>
+          <Link
+            to="/settings"
+            className="block text-sm text-black"
+            onClick={toggleMenu}
+          >
+            Settings
+          </Link>
         </div>
       )}
-      {/* Desktop Menu */}
-      <div className="hidden md:flex space-x-6">
-        <a href="#!" className="text-sm text-black">
-          {" "}
-          {/* Text color set to black */}
-          Home
-        </a>
-        <a href="#!" className="text-sm text-black">
-          {" "}
-          {/* Text color set to black */}
-          Settings
-        </a>
-        <a href="#!" className="text-sm text-black">
-          {" "}
-          {/* Text color set to black */}
-          About
-        </a>
-      </div>
     </nav>
   );
 }

@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { decode } from "html-entities";
-
-// static asset imports
 import backgroundImage from "../assets/Group.png";
-import loadingBackground from "../assets/bback.jpg";
+import loadingBackground from "../assets/home.jpg";
 import finalBackground from "../assets/Frame.png"; // New background for Play Again
 
 export default function Quiz({ menuOpen }) {
@@ -40,9 +38,9 @@ export default function Quiz({ menuOpen }) {
   ];
 
   const difficultyLevels = [
-    { name: "Basics", difficulty: "easy" },
-    { name: "Advanced", difficulty: "medium" },
-    { name: "Fun Facts", difficulty: "hard" },
+    { name: "Easy", difficulty: "easy" },
+    { name: "Medium", difficulty: "medium" },
+    { name: "Hard", difficulty: "hard" },
   ];
 
   const loadQuestions = async (subjectId, difficulty) => {
@@ -168,11 +166,11 @@ export default function Quiz({ menuOpen }) {
         }}
       >
         <h1 className="text-7xl font-bold text-black mb-20 drop-shadow-lg animate-pulse">
-          Welcome to Question World!
+          Welcome to Question World
         </h1>
         <button
           onClick={() => setPage("subjectSelection")}
-          className="bg-blue-600 text-white py-2 px-9 rounded hover:bg-blue-500 transition duration-300"
+          className="bg-blue-500 text-white py-3 px-20 rounded hover:bg-blue-500 transition duration-300"
         >
           Start
         </button>
@@ -197,9 +195,9 @@ export default function Quiz({ menuOpen }) {
         <div className="relative">
           <button
             onClick={() => setShowDropdown(!showDropdown)}
-            className="mb-4 border rounded text-blue-600 cursor-pointer appearance-none flex items-center justify-between"
+            className="mb-4 border-2 border-black rounded text-gray-600 cursor-pointer appearance-none flex items-center justify-between"
             style={{
-              width: "200px",
+              width: "250px",
               padding: "8px 10px",
               fontSize: "16px",
               backgroundColor: "white",
@@ -223,7 +221,7 @@ export default function Quiz({ menuOpen }) {
           </button>
           {showDropdown && (
             <div
-              className="absolute z-10 bg-white border rounded shadow-lg"
+              className="absolute z-10 bg-white border border-black rounded shadow-lg ml-7 "
               style={{
                 maxHeight: "200px",
                 overflowY: "auto",
@@ -237,7 +235,7 @@ export default function Quiz({ menuOpen }) {
                     setSelectedSubject(subj);
                     setShowDropdown(false);
                   }}
-                  className="p-2 cursor-pointer hover:bg-blue-700"
+                  className="p-2 cursor-pointer hover:bg-blue-400 "
                 >
                   {subj.name}
                 </div>
@@ -254,9 +252,9 @@ export default function Quiz({ menuOpen }) {
                   startQuiz(level.difficulty);
                   setPage("quiz");
                 }}
-                className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue- transition duration-300"
+                className="bg-blue-500 border-2 border-blue-500 text-white py-2 px-20 rounded hover:bg-blue- transition duration-300"
               >
-                {selectedSubject.name} {level.name}
+                {level.name}
               </button>
             ))}
           </div>
@@ -275,7 +273,7 @@ export default function Quiz({ menuOpen }) {
           backgroundPosition: "center",
         }}
       >
-        <div className="text-white text-2xl">Loading Questions...</div>
+        <div className="text-black text-2xl">Loading Questions...</div>
       </div>
     );
   }
@@ -297,7 +295,11 @@ export default function Quiz({ menuOpen }) {
           menuOpen ? "hidden" : "flex"
         }`}
       >
-        <div className="bg-transparent bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-lg mr-8">
+        <div
+          className={`bg-transparent bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-lg mt-16 mr-40 ${
+            gameFinished ? "border-2 border-blue-400" : "border"
+          }`}
+        >
           <h1 className="text-2xl font-bold text-center text-black mb-1">
             {gameFinished ? "Quiz Finished!" : "Quiz Time!"}
           </h1>
@@ -323,13 +325,13 @@ export default function Quiz({ menuOpen }) {
                       className={`p-2 cursor-pointer rounded border mb-2 transition-all duration-300 ${
                         showResult
                           ? option === correctAnswer
-                            ? "bg-green-400 border-green-700"
+                            ? "bg-white-400 border-4 border-green-600"
                             : selectedOption === option
-                            ? "bg-red-400 border-red-700"
+                            ? "bg-white-400 border-4 border-red-600"
                             : "bg-blue-300 text-blue-950 font-bold"
                           : selectedOption === option
-                          ? "bg-blue-300 text-purple-950 font-bold"
-                          : "bg-blue-300 text-purple-950"
+                          ? "bg-blue-300 text-black-950 font-bold border-4 border-blue-700"
+                          : "bg-blue-300 text-black-950"
                       }`}
                     >
                       {decode(option)}
@@ -339,7 +341,7 @@ export default function Quiz({ menuOpen }) {
                 {showResult ? (
                   <button
                     onClick={moveToNextQuestion}
-                    className="block w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
+                    className="block w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
                   >
                     Next Question
                   </button>
@@ -353,7 +355,7 @@ export default function Quiz({ menuOpen }) {
                     </button>
                     <button
                       onClick={skipQuestion}
-                      className="block w-full border-2 border-blue-800 text-black py-2 rounded mt-4 hover:bg-blue-700 transition duration-300"
+                      className="block w-full  bg-blue-700 text-white py-2 rounded mt-4 hover:bg-blue-700 transition duration-300"
                     >
                       Skip Question
                     </button>
@@ -380,7 +382,7 @@ export default function Quiz({ menuOpen }) {
               <div className="flex justify-center mt-4">
                 <button
                   onClick={playAgain}
-                  className="block align-center bg-blue-800 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+                  className="block align-center bg-blue-600 text-white py-2 px-8 rounded hover:bg-blue-700 transition duration-300"
                 >
                   Play Again
                 </button>
