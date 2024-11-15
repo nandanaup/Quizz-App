@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { decode } from "html-entities";
 import backgroundImage from "../assets/Group.png";
-import loadingBackground from "../assets/home.jpg";
+import loadingBackground from "../assets/home-cropped.jpg";
 import finalBackground from "../assets/Frame.png";
 
 export default function Quiz({ menuOpen }) {
@@ -155,14 +155,7 @@ export default function Quiz({ menuOpen }) {
 
   if (page === "welcome") {
     return (
-      <div
-        className="flex flex-col justify-center items-center min-h-screen"
-        style={{
-          backgroundImage: `url(${loadingBackground})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <div className="flex flex-col justify-center items-center min-h-screen bg-[url('/src/assets/home-cropped.jpg')] ">
         <h1 className="text-7xl font-bold text-black mb-20 drop-shadow-lg animate-pulse">
           Welcome to Question World
         </h1>
