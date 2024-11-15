@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { decode } from "html-entities";
 import backgroundImage from "../assets/Group.png";
 import loadingBackground from "../assets/home.jpg";
-import finalBackground from "../assets/Frame.png"; // New background for Play Again
+import finalBackground from "../assets/Frame.png";
 
 export default function Quiz({ menuOpen }) {
   const [questionData, setQuestionData] = useState([]);
@@ -20,20 +20,18 @@ export default function Quiz({ menuOpen }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [page, setPage] = useState("welcome");
   const [topScore, setTopScore] = useState(0);
-  const [skippedCount, setSkippedCount] = useState(0); // Track skipped questions
+  const [skippedCount, setSkippedCount] = useState(0);
 
   const totalQuestions = 10;
 
   const subjects = [
     { id: 9, name: "General Knowledge" },
     { id: 10, name: "Entertainment: Books" },
-    { id: 13, name: "Entertainment: Musicals & Theatres" },
     { id: 14, name: "Entertainment: Video Games" },
     { id: 15, name: "Entertainment: Board Games" },
     { id: 16, name: "Science: Nature" },
     { id: 17, name: "Science: Computers" },
     { id: 18, name: "Science: Gadgets" },
-    { id: 19, name: "Science: Technology" },
     { id: 20, name: "Mythology" },
   ];
 
@@ -65,7 +63,7 @@ export default function Quiz({ menuOpen }) {
     setSelectedOption("");
     setShowResult(false);
     setGameFinished(false);
-    setSkippedCount(0); // Reset skipped count
+    setSkippedCount(0);
   };
 
   const shuffleOptions = (options) => options.sort(() => Math.random() - 0.5);
@@ -88,7 +86,7 @@ export default function Quiz({ menuOpen }) {
       setAskedCount(askedCount + 1);
     } else {
       if (correctScore > topScore) {
-        setTopScore(correctScore); // Update top score if current score is higher
+        setTopScore(correctScore);
       }
       setGameFinished(true);
     }
@@ -170,7 +168,7 @@ export default function Quiz({ menuOpen }) {
         </h1>
         <button
           onClick={() => setPage("subjectSelection")}
-          className="bg-blue-500 text-white py-3 px-20 rounded hover:bg-blue-500 transition duration-300"
+          className="bg-blue-500 text-white py-3 px-20 rounded hover:bg-blue-600 transition duration-300"
         >
           Start
         </button>
@@ -304,7 +302,6 @@ export default function Quiz({ menuOpen }) {
             {gameFinished ? "Quiz Finished!" : "Quiz Time!"}
           </h1>
 
-          {/* Show score only when the quiz is active */}
           {!gameFinished && (
             <div className="text-center text-xl font-semibold text-black mb-4">
               Score: {correctScore} / {totalQuestions}
@@ -376,7 +373,6 @@ export default function Quiz({ menuOpen }) {
                   You answered {correctScore} out of {totalQuestions} correctly!
                   <div className="mt-2">{performanceMessage()}</div>
                   <div className="mt-2">{renderSmiley()}</div>{" "}
-                  {/* Smiley based on score */}
                 </div>
               )}
               <div className="flex justify-center mt-4">
