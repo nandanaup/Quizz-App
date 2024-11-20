@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { decode } from "html-entities";
-import backgroundImage from "../assets/Group.png";
-import loadingBackground from "../assets/home.jpg";
-import finalBackground from "../assets/Frame.png";
+import backgroundImage from "../assets/crop2.jpg";
+import loadingBackground from "../assets/crop1.jpg";
+import finalBackground from "../assets/final.jpg";
+import logo from "../assets/amico.png";
+import thinkingFaceLogo from "../assets/Thinking face.png";
 
 export default function Quiz({ menuOpen }) {
   const [questionData, setQuestionData] = useState([]);
@@ -21,6 +23,7 @@ export default function Quiz({ menuOpen }) {
   const [page, setPage] = useState("welcome");
   const [topScore, setTopScore] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const totalQuestions = 10;
 
@@ -73,7 +76,7 @@ export default function Quiz({ menuOpen }) {
   const moveToNextQuestion = () => {
     setSelectedOption("");
     setShowResult(false);
-
+    setAlertMessage("");
     if (askedCount + 1 < totalQuestions) {
       const nextQuestion = questionData[askedCount + 1];
       setCorrectAnswer(nextQuestion.correct_answer);
@@ -94,7 +97,7 @@ export default function Quiz({ menuOpen }) {
 
   const checkAnswer = () => {
     if (!selectedOption) {
-      alert("Please select an option!");
+      setAlertMessage("Please select an option!");
       return;
     }
 
@@ -103,11 +106,12 @@ export default function Quiz({ menuOpen }) {
     if (selectedOption === correctAnswer) {
       setCorrectScore(correctScore + 1);
     }
+    setAlertMessage("");
   };
 
   const skipQuestion = () => {
-    setSkippedCount(skippedCount + 1); // Increment skipped count
-    moveToNextQuestion(); // Move to the next question
+    setSkippedCount(skippedCount + 1);
+    moveToNextQuestion();
   };
 
   const playAgain = () => {
@@ -159,8 +163,9 @@ export default function Quiz({ menuOpen }) {
         className="flex flex-col justify-center items-center min-h-screen"
         style={{
           backgroundImage: `url(${loadingBackground})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundSize: "auto", // Ensures original size of image is used for repeating
+          backgroundPosition: "center", // Aligns background at the bottom of the screen
+          backgroundRepeat: "repeat", // Repeats the image both vertically and horizontally
         }}
       >
         <h1 className="text-7xl font-bold text-black mb-20 drop-shadow-lg animate-pulse">
@@ -182,8 +187,9 @@ export default function Quiz({ menuOpen }) {
         className="flex flex-col justify-center items-center min-h-screen"
         style={{
           backgroundImage: `url(${loadingBackground})`,
-          backgroundSize: "cover",
+          backgroundSize: "auto",
           backgroundPosition: "center",
+          backgroundRepeat: "repeat",
         }}
       >
         <h1 className="text-6xl font-bold text-black mb-12">
@@ -267,8 +273,9 @@ export default function Quiz({ menuOpen }) {
         className="flex flex-col justify-center items-center min-h-screen"
         style={{
           backgroundImage: `url(${loadingBackground})`,
-          backgroundSize: "cover",
+          backgroundSize: "auto",
           backgroundPosition: "center",
+          backgroundRepeat: "repeat",
         }}
       >
         <div className="text-black text-2xl">Loading Questions...</div>
@@ -278,23 +285,42 @@ export default function Quiz({ menuOpen }) {
 
   return (
     <div
-      className="relative min-h-screen"
+      className="relative min-h-screen "
       style={{
         backgroundImage: `url(${
           gameFinished ? finalBackground : backgroundImage
         })`,
-        backgroundSize: "cover",
+        backgroundSize: "auto",
         backgroundPosition: "center",
         opacity: 0.9,
       }}
     >
+      {!gameFinished && (
+        <img
+          src={thinkingFaceLogo}
+          alt="Thinking Face Logo"
+          className="absolute top-1/4 left-0  "
+          style={{
+            zIndex: 10,
+            width: "500px",
+            height: "500px",
+          }}
+        />
+      )}
+      {gameFinished && (
+        <img
+          src={logo}
+          alt="Amico Logo"
+          className="absolute top-44 left-20 p-4 w-68 h-auto opacity-90"
+        />
+      )}
       <div
         className={`flex justify-end items-center min-h-screen ${
           menuOpen ? "hidden" : "flex"
         }`}
       >
         <div
-          className={`bg-transparent bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-lg mt-16 mr-40 ${
+          className={`bg-white absolute z-10 bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-lg mt-16 md:mr-40  ${
             gameFinished ? "border-2 border-blue-400" : "border"
           }`}
         >
@@ -383,6 +409,12 @@ export default function Quiz({ menuOpen }) {
                   Play Again
                 </button>
               </div>
+            </div>
+          )}
+          {/* Show the alert message here */}
+          {alertMessage && (
+            <div className="bg-red-500 text-white text-center p-2 mt-4 rounded">
+              {alertMessage}
             </div>
           )}
         </div>

@@ -10,13 +10,22 @@ export default function Navbar({ menuOpen, toggleMenu }) {
         <h1 className="text-xl font-bold ml-10">QuizSphere</h1>
 
         <div className="hidden md:flex space-x-6 mr-20">
-          <Link to="/quiz" className="text-sm text-blue-950">
+          <Link
+            to="/quiz"
+            className="text-sm text-blue-950 bg-yellow-400 rounded py-2 px-3"
+          >
             Home
           </Link>
-          <Link to="/about" className="text-sm text-blue-950">
+          <Link
+            to="/about"
+            className="text-sm text-blue-950  bg-yellow-400 rounded py-2 px-3"
+          >
             About
           </Link>
-          <Link to="/settings" className="text-sm text-blue-950">
+          <Link
+            to="/settings"
+            className="text-sm text-blue-950  bg-yellow-400 rounded py-2 px-3"
+          >
             Settings
           </Link>
         </div>
@@ -37,21 +46,21 @@ export default function Navbar({ menuOpen, toggleMenu }) {
         <div className="md:hidden mt-4 space-y-2 bg-lightblue-500 p-4 rounded">
           <Link
             to="/quiz"
-            className="block text-sm text-black"
+            className="block text-sm text-black bg-yellow-300 p-2 "
             onClick={toggleMenu}
           >
             Home
           </Link>
           <Link
             to="/about"
-            className="block text-sm text-black"
+            className="block text-sm text-black bg-yellow-300 p-2"
             onClick={toggleMenu}
           >
             About
           </Link>
           <Link
             to="/settings"
-            className="block text-sm text-black"
+            className="block text-sm text-black bg-yellow-300 p-2"
             onClick={toggleMenu}
           >
             Settings
