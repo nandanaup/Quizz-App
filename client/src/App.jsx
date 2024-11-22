@@ -4,6 +4,7 @@ import Quiz from "./component/Quiz";
 import Navbar from "./component/Navbar";
 
 import About from "./component/About";
+import Settings from "./component/Settings";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/quiz" element={<Quiz menuOpen={menuOpen} />} />
         <Route path="/about" element={<About />} />
-
+        <Route path="/settings" element={<Settings />} />
         <Route path="/" element={<Quiz menuOpen={menuOpen} />} />
       </Routes>
     </Router>

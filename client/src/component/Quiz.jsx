@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { decode } from "html-entities";
-import backgroundImage from "../assets/crop2.jpg";
-import loadingBackground from "../assets/crop1.jpg";
-import finalBackground from "../assets/final.jpg";
+
 import logo from "../assets/amico.png";
 import thinkingFaceLogo from "../assets/Thinking face.png";
 
@@ -149,26 +147,18 @@ export default function Quiz({ menuOpen }) {
 
   const renderSmiley = () => {
     if (correctScore === totalQuestions) {
-      return "😄"; // Happy
+      return "😄";
     } else if (correctScore >= totalQuestions * 0.7) {
-      return "🙂"; // Neutral
+      return "🙂";
     } else {
-      return "😞"; // Sad
+      return "😞";
     }
   };
 
   if (page === "welcome") {
     return (
-      <div
-        className="flex flex-col justify-center items-center min-h-screen"
-        style={{
-          backgroundImage: `url(${loadingBackground})`,
-          backgroundSize: "auto", // Ensures original size of image is used for repeating
-          backgroundPosition: "center", // Aligns background at the bottom of the screen
-          backgroundRepeat: "repeat", // Repeats the image both vertically and horizontally
-        }}
-      >
-        <h1 className="text-7xl font-bold text-black mb-20 drop-shadow-lg animate-pulse">
+      <div className="flex flex-col bg-repeat justify-center bg-[url('/src/assets/crop1.jpg')] dark:bg-[url('/src/assets/black.jpg')] items-center min-h-screen">
+        <h1 className="text-7xl font-bold dark:text-white text-black mb-20 drop-shadow-lg animate-pulse">
           Welcome to Question World
         </h1>
         <button
@@ -183,23 +173,15 @@ export default function Quiz({ menuOpen }) {
 
   if (page === "subjectSelection") {
     return (
-      <div
-        className="flex flex-col justify-center items-center min-h-screen"
-        style={{
-          backgroundImage: `url(${loadingBackground})`,
-          backgroundSize: "auto",
-          backgroundPosition: "center",
-          backgroundRepeat: "repeat",
-        }}
-      >
-        <h1 className="text-6xl font-bold text-black mb-12">
+      <div className="flex flex-col bg-repeat justify-center bg-[url('/src/assets/crop1.jpg')] dark:bg-[url('/src/assets/black.jpg')] items-center min-h-screen">
+        <h1 className="text-6xl font-bold dark:text-white text-black mb-12">
           What do you want to learn today?
         </h1>
 
         <div className="relative">
           <button
             onClick={() => setShowDropdown(!showDropdown)}
-            className="mb-4 border-2 border-black rounded text-gray-600 cursor-pointer appearance-none flex items-center justify-between"
+            className="mb-4 border-2 border-black dark:border-black rounded text-gray-600  cursor-pointer appearance-none flex items-center justify-between"
             style={{
               width: "250px",
               padding: "8px 10px",
@@ -207,7 +189,7 @@ export default function Quiz({ menuOpen }) {
               backgroundColor: "white",
             }}
           >
-            <span className=" text-black ">
+            <span className=" text-black dark:text-black ">
               {selectedSubject ? selectedSubject.name : "Choose a subject"}
             </span>
             <svg
@@ -269,31 +251,19 @@ export default function Quiz({ menuOpen }) {
 
   if (loading) {
     return (
-      <div
-        className="flex flex-col justify-center items-center min-h-screen"
-        style={{
-          backgroundImage: `url(${loadingBackground})`,
-          backgroundSize: "auto",
-          backgroundPosition: "center",
-          backgroundRepeat: "repeat",
-        }}
-      >
-        <div className="text-black text-2xl">Loading Questions...</div>
+      <div className="flex flex-col bg-repeat justify-center bg-[url('/src/assets/crop1.jpg')] dark:bg-[url('/src/assets/black.jpg')] items-center min-h-screen">
+        <h1 className="text-black text-2xl">Loading Questions...</h1>
       </div>
     );
   }
 
   return (
     <div
-      className="relative min-h-screen "
-      style={{
-        backgroundImage: `url(${
-          gameFinished ? finalBackground : backgroundImage
-        })`,
-        backgroundSize: "auto",
-        backgroundPosition: "center",
-        opacity: 0.9,
-      }}
+      className={`relative min-h-screen bg-center bg-auto opacity-90 ${
+        gameFinished
+          ? "bg-[url('/src/assets/final.jpg')] dark:bg-[url('/src/assets/last.jpg')]"
+          : "bg-[url('/src/assets/crop2.jpg')] dark:bg-[url('/src/assets/blackk.jpg')]"
+      }`}
     >
       {!gameFinished && (
         <img
@@ -411,7 +381,7 @@ export default function Quiz({ menuOpen }) {
               </div>
             </div>
           )}
-          {/* Show the alert message here */}
+
           {alertMessage && (
             <div className="bg-red-500 text-white text-center p-2 mt-4 rounded">
               {alertMessage}

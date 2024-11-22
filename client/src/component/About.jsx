@@ -1,4 +1,4 @@
-import backgroundImage from "../assets/bback.jpg"; // Adjust path according to your structure
+import backgroundImage from "../assets/bback.jpg";
 
 function About() {
   return (
